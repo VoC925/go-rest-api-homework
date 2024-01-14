@@ -1,13 +1,5 @@
-package main
+package data
 
-import (
-	"fmt"
-	"net/http"
-
-	"github.com/go-chi/chi/v5"
-)
-
-// Task ...
 type Task struct {
 	ID           string   `json:"id"`
 	Description  string   `json:"description"`
@@ -15,7 +7,12 @@ type Task struct {
 	Applications []string `json:"applications"`
 }
 
-var tasks = map[string]Task{
+// Конструктор структуры Task
+func CreateTask() *Task {
+	return &Task{}
+}
+
+var Tasks = map[string]Task{
 	"1": {
 		ID:          "1",
 		Description: "Сделать финальное задание темы REST API",
@@ -37,19 +34,4 @@ var tasks = map[string]Task{
 			"Postman",
 		},
 	},
-}
-
-// Ниже напишите обработчики для каждого эндпоинта
-// ...
-
-func main() {
-	r := chi.NewRouter()
-
-	// здесь регистрируйте ваши обработчики
-	// ...
-
-	if err := http.ListenAndServe(":8080", r); err != nil {
-		fmt.Printf("Ошибка при запуске сервера: %s", err.Error())
-		return
-	}
 }
